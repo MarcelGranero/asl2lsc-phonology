@@ -45,30 +45,6 @@
       "examples"
     ]
   },
-  "slgcn_popsign_h6": {
-    "family": "slgcn_popsign",
-    "checkpoint": "${ASL2LSC_MODELS_DIR}/slgcn-popsign-pfr-h6.pt",
-    "run_name": "popsign_pfr_h6_test",
-    "flags": [
-      "--channels",
-      "presence",
-      "--scale-mode",
-      "fit"
-    ]
-  },
-  "slgcn_popsign_h6_examples": {
-    "family": "slgcn_popsign",
-    "checkpoint": "${ASL2LSC_MODELS_DIR}/slgcn-popsign-pfr-h6.pt",
-    "run_name": "popsign_pfr_h6_examples",
-    "flags": [
-      "--channels",
-      "presence",
-      "--scale-mode",
-      "fit",
-      "--split",
-      "examples"
-    ]
-  },
   "mlp_semlex": {
     "family": "mlp",
     "run_name": "all16",

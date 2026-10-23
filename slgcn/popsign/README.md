@@ -34,8 +34,8 @@ EXTRA_ARGS="--feature-labels $ASL2LSC_SLGCN_POPSIGN_DATA/feature_labels16_naclas
        04_phase2_multihead/run_multihead.sbatch
 ```
 
-Evaluate a phase-2 checkpoint on the PopSign test split (for the 6-head
-`slgcn-popsign-pfr-h6.pt` drop `EXTRA_ARGS`):
+Evaluate a phase-2 checkpoint on the PopSign test split (for a 6-head
+checkpoint trained with the default labels, drop `EXTRA_ARGS`):
 
 ```bash
 sbatch --export=ALL,REGIME=pfr,CKPT=$ASL2LSC_MODELS_DIR/slgcn-popsign-pfr16-nac.pt,\

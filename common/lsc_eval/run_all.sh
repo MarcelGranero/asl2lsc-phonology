@@ -4,7 +4,7 @@
 # run_inference_all.sh). Idempotent; run from anywhere; plain python3
 # (stdlib only), no conda env needed.
 #
-# Arm name scheme: <family>_<corpus>[_h6]_<split>_<decoding>; one released
+# Arm name scheme: <family>_<corpus>_<split>_<decoding>; one released
 # checkpoint per <family>_<corpus> (inference/checkpoints.json).
 set -eo pipefail
 cd "$(dirname "$0")"
@@ -28,10 +28,6 @@ slgcn_popsign_test_unconstrained         slgcn/popsign/results/lsc_eval/popsign_
 slgcn_popsign_test_constrained           slgcn/popsign/results/lsc_eval/popsign_pfr16_test_cons/predictions.csv
 slgcn_popsign_examples_unconstrained     slgcn/popsign/results/lsc_eval/popsign_pfr16_examples/predictions.csv
 slgcn_popsign_examples_constrained       slgcn/popsign/results/lsc_eval/popsign_pfr16_examples_cons/predictions.csv
-slgcn_popsign_h6_test_unconstrained      slgcn/popsign/results/lsc_eval/popsign_pfr_h6_test/predictions.csv
-slgcn_popsign_h6_test_constrained        slgcn/popsign/results/lsc_eval/popsign_pfr_h6_test_cons/predictions.csv
-slgcn_popsign_h6_examples_unconstrained  slgcn/popsign/results/lsc_eval/popsign_pfr_h6_examples/predictions.csv
-slgcn_popsign_h6_examples_constrained    slgcn/popsign/results/lsc_eval/popsign_pfr_h6_examples_cons/predictions.csv
 mlp_semlex_test_unconstrained            baseline_mlp/results/lsc_v2/lsc_test_all16_per_clip.csv
 mlp_semlex_test_constrained              baseline_mlp/results/lsc_v2/lsc_test_all16_cons_per_clip.csv
 mlp_semlex_examples_unconstrained        baseline_mlp/results/lsc_v2/lsc_examples_all16_per_clip.csv
