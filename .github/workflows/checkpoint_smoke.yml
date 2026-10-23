@@ -14,10 +14,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install CPU torch + huggingface_hub
+      - name: Install CPU torch + numpy + huggingface_hub
+        # numpy: the PopSign MLP checkpoint stores a numpy scalar in its
+        # metrics, so loading it unpickles numpy objects.
         run: |
           pip install torch --index-url https://download.pytorch.org/whl/cpu
-          pip install "huggingface_hub[cli]"
+          pip install numpy "huggingface_hub[cli]"
       - name: Download released MLP checkpoints
         run: |
           hf download MarcelGranero/asl2lsc-phonology \
