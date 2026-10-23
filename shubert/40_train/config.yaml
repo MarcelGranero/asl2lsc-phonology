@@ -1,0 +1,35 @@
+# Paper hyperparameters (Sec 4.3 full fine-tuning; phonological variant
+# drops weight decay). Anything not stated by the paper is a judgement
+# call.
+seed: 42
+batch_size: 128      # TRUE batch (paper) — never split. The head's BatchNorm
+                     # is batch-size dependent, so grad accumulation is NOT
+                     # equivalent here; memory is solved with
+                     # checkpoint_activations instead (see below).
+checkpoint_activations: true
+                     # Recompute encoder activations in backward. Worst-case
+                     # 128-clip batch: 13.66 GB -> 3.84 GB peak on a 15.6 GB
+                     # T4, which is what the `high` partition actually has
+                     # (no L40S there). ~30% slower per step, exact same math.
+epochs: 125
+lr: 1.0e-4          # classification head (BN + 16 linear heads) — paper value
+backbone_lr: 1.0e-5 # pretrained encoder at 1/10 of the head's LR.
+                    # DEVIATION, not a paper value. Sec 4.3 describes only
+                    # LoRA; "full fine-tuning" appears once in the whole paper
+                    # (the Tab. 9 back-reference), so Tab. 9 = the base
+                    # hyperparameters MINUS the LoRA extras (frozen backbone,
+                    # 1/10 LoRA LR, 0.1 label smoothing) => a flat 1e-4.
+                    # We borrow the paper's own 1/10 ratio (used for LoRA
+                    # modules, and again in SLT: 5e-4 ByT5 / 5e-5 SHuBERT)
+                    # because a flat 1e-4 is unusable. Measured: at 1e-4 the
+                    # encoder representation collapses within 20 steps
+                    # (across-clip std 0.275 -> 0.037 -> 0.000 by epoch 3,
+                    # every clip mapping to one identical vector and all 16
+                    # heads predicting a constant class). At 1e-5 it stays
+                    # healthy (~0.27) AND reaches a lower loss.
+weight_decay: 0.0
+patience: 15        # early stop on val macro Recall@1
+min_epochs: 30
+num_workers: 4
+train_split: train
+val_split: val

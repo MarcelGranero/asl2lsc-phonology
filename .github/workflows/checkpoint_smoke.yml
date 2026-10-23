@@ -1,0 +1,27 @@
+name: checkpoint-smoke
+# Downloads the released MLP checkpoints and strict-loads them into the
+# shipped architecture (tools/smoke_test.py step 3). Manual + monthly, not a
+# push gate: it depends on the external model release being up.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 3 * *"
+jobs:
+  checkpoint-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install CPU torch + huggingface_hub
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install "huggingface_hub[cli]"
+      - name: Download released MLP checkpoints
+        run: |
+          hf download MarcelGranero/asl2lsc-phonology \
+            mlp-semlex-all16.pt mlp-popsign-all16-nac.pt \
+            --local-dir ckpts
+      - name: Smoke test with checkpoint load
+        run: ASL2LSC_SMOKE_CKPT_DIR=ckpts python3 tools/smoke_test.py .

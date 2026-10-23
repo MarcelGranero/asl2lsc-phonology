@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+logs/
+slgcn/*/external/SAM-SLR-v2/
+local_data_config.py

@@ -1,0 +1,82 @@
+{
+  "_readme": "Checkpoint registry for run_inference_all.sh: one entry per released checkpoint arm on the LSC benchmark. `family` picks the sbatch wrapper (inference/<family>_arm.sbatch); the other fields parameterise the leaf's own eval script. `checkpoint` resolves through ASL2LSC_MODELS_DIR -- point it at a directory holding the released checkpoint files. Running your own checkpoint = one entry here.",
+  "shubert_semlex": {
+    "family": "shubert",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/shubert-semlex-main.pt",
+    "run_label": "semlex_main"
+  },
+  "shubert_popsign": {
+    "family": "shubert",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/shubert-popsign-main.pt",
+    "run_label": "popsign_main",
+    "label_maps": "popsign16nac_label_maps.json"
+  },
+  "slgcn_semlex": {
+    "family": "slgcn_semlex",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/slgcn-semlex-pfr-repose.pt",
+    "regime": "pfr",
+    "run_name": "semlex_pfr_repose"
+  },
+  "slgcn_popsign": {
+    "family": "slgcn_popsign",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/slgcn-popsign-pfr16-nac.pt",
+    "run_name": "popsign_pfr16_test",
+    "flags": [
+      "--feature-vocab",
+      "results/feature_vocab16_naclass.json",
+      "--channels",
+      "presence",
+      "--scale-mode",
+      "fit"
+    ]
+  },
+  "slgcn_popsign_examples": {
+    "family": "slgcn_popsign",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/slgcn-popsign-pfr16-nac.pt",
+    "run_name": "popsign_pfr16_examples",
+    "flags": [
+      "--feature-vocab",
+      "results/feature_vocab16_naclass.json",
+      "--channels",
+      "presence",
+      "--scale-mode",
+      "fit",
+      "--split",
+      "examples"
+    ]
+  },
+  "slgcn_popsign_h6": {
+    "family": "slgcn_popsign",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/slgcn-popsign-pfr-h6.pt",
+    "run_name": "popsign_pfr_h6_test",
+    "flags": [
+      "--channels",
+      "presence",
+      "--scale-mode",
+      "fit"
+    ]
+  },
+  "slgcn_popsign_h6_examples": {
+    "family": "slgcn_popsign",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/slgcn-popsign-pfr-h6.pt",
+    "run_name": "popsign_pfr_h6_examples",
+    "flags": [
+      "--channels",
+      "presence",
+      "--scale-mode",
+      "fit",
+      "--split",
+      "examples"
+    ]
+  },
+  "mlp_semlex": {
+    "family": "mlp",
+    "run_name": "all16",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/mlp-semlex-all16.pt"
+  },
+  "mlp_popsign": {
+    "family": "mlp",
+    "run_name": "popsign_all16_nac_s42",
+    "checkpoint": "${ASL2LSC_MODELS_DIR}/mlp-popsign-all16-nac.pt"
+  }
+}

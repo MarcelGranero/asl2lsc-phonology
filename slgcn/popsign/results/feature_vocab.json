@@ -1,0 +1,296 @@
+{
+  "created_at": "2026-08-06T21:29:52.654873+00:00",
+  "git_sha": "db3dfc9372c3d3da23977921b6640d6a10df8a8b",
+  "source": "PopSign merged_videos_dataset_batch*.json (handshape + subhandshapes fields only)",
+  "null_policy": "class",
+  "null_token": "NA",
+  "features": [
+    "handshape",
+    "selected_fingers",
+    "flexion",
+    "spread",
+    "thumb_position",
+    "thumb_contact"
+  ],
+  "feature_sizes": [
+    37,
+    9,
+    7,
+    3,
+    2,
+    3
+  ],
+  "vocab": {
+    "handshape": {
+      "1": 0,
+      "3": 1,
+      "4": 2,
+      "5": 3,
+      "8": 4,
+      "a": 5,
+      "baby_o": 6,
+      "bent_1": 7,
+      "bent_v": 8,
+      "c": 9,
+      "closed_b": 10,
+      "curved_5": 11,
+      "curved_l": 12,
+      "curved_v": 13,
+      "d": 14,
+      "f": 15,
+      "flat_1": 16,
+      "flat_4": 17,
+      "flat_b": 18,
+      "flat_h": 19,
+      "flat_o": 20,
+      "flatspread_5": 21,
+      "g": 22,
+      "h": 23,
+      "i": 24,
+      "ily": 25,
+      "l": 26,
+      "o": 27,
+      "open_8": 28,
+      "open_b": 29,
+      "open_h": 30,
+      "p": 31,
+      "s": 32,
+      "spread_open_e": 33,
+      "v": 34,
+      "w": 35,
+      "y": 36
+    },
+    "selected_fingers": {
+      "i": 0,
+      "im": 1,
+      "imr": 2,
+      "imrp": 3,
+      "ip": 4,
+      "m": 5,
+      "mrp": 6,
+      "p": 7,
+      "t": 8
+    },
+    "flexion": {
+      "Bent": 0,
+      "Curved": 1,
+      "Flat": 2,
+      "FullyClosed": 3,
+      "FullyOpen": 4,
+      "Stacked": 5,
+      "NA": 6
+    },
+    "spread": {
+      "0": 0,
+      "1": 1,
+      "NA": 2
+    },
+    "thumb_position": {
+      "Closed": 0,
+      "Open": 1
+    },
+    "thumb_contact": {
+      "0": 0,
+      "1": 1,
+      "NA": 2
+    }
+  },
+  "train_value_counts": {
+    "handshape": {
+      "open_b": 10716,
+      "1": 9605,
+      "5": 7638,
+      "a": 5816,
+      "s": 5147,
+      "v": 3724,
+      "baby_o": 3630,
+      "y": 3005,
+      "f": 2847,
+      "closed_b": 2807,
+      "o": 2793,
+      "flat_b": 2760,
+      "c": 2516,
+      "flatspread_5": 2366,
+      "bent_1": 2356,
+      "flat_o": 2282,
+      "h": 2137,
+      "open_8": 2121,
+      "l": 2055,
+      "curved_5": 2050,
+      "flat_1": 1777,
+      "3": 1532,
+      "g": 1416,
+      "flat_h": 1246,
+      "spread_open_e": 1115,
+      "8": 988,
+      "4": 872,
+      "p": 868,
+      "open_h": 563,
+      "curved_l": 560,
+      "bent_v": 447,
+      "i": 426,
+      "w": 393,
+      "ily": 255,
+      "curved_v": 218,
+      "d": 153,
+      "flat_4": 97
+    },
+    "selected_fingers": {
+      "imrp": 42610,
+      "i": 23891,
+      "im": 11284,
+      "t": 5816,
+      "p": 3562,
+      "m": 3464,
+      "imr": 262,
+      "ip": 255,
+      "mrp": 153
+    },
+    "flexion": {
+      "FullyOpen": 44980,
+      "Flat": 15363,
+      "Curved": 11960,
+      "Bent": 7163,
+      "NA": 5816,
+      "FullyClosed": 5147,
+      "Stacked": 868
+    },
+    "spread": {
+      "NA": 43003,
+      "0": 28682,
+      "1": 19612
+    },
+    "thumb_position": {
+      "Open": 63112,
+      "Closed": 28185
+    },
+    "thumb_contact": {
+      "0": 59629,
+      "1": 25852,
+      "NA": 5816
+    }
+  },
+  "values_unseen_in_train": {},
+  "coverage_vs_packed_clips": {
+    "train": {
+      "n_packed": 110774,
+      "n_with_features": 91296,
+      "n_masked": 19478,
+      "frac": 0.8242
+    },
+    "val": {
+      "n_packed": 29868,
+      "n_with_features": 24628,
+      "n_masked": 5240,
+      "frac": 0.8246
+    },
+    "test": {
+      "n_packed": 33599,
+      "n_with_features": 27340,
+      "n_masked": 6259,
+      "frac": 0.8137
+    }
+  },
+  "note": "PopSign carries 6 HANDSHAPE-related feature types, not the 16 ASL-LEX types of the Sem-Lex paper's Table 1/5 \u2014 a PopSign phase-2 run is a handshape-phonology model and is NOT head-for-head comparable to that table.",
+  "n_features": 6,
+  "n_videos": 143266,
+  "per_feature": {
+    "handshape": {
+      "n_classes": 37,
+      "null_rate": 0.0,
+      "classes": [
+        "1",
+        "3",
+        "4",
+        "5",
+        "8",
+        "a",
+        "baby_o",
+        "bent_1",
+        "bent_v",
+        "c",
+        "closed_b",
+        "curved_5",
+        "curved_l",
+        "curved_v",
+        "d",
+        "f",
+        "flat_1",
+        "flat_4",
+        "flat_b",
+        "flat_h",
+        "flat_o",
+        "flatspread_5",
+        "g",
+        "h",
+        "i",
+        "ily",
+        "l",
+        "o",
+        "open_8",
+        "open_b",
+        "open_h",
+        "p",
+        "s",
+        "spread_open_e",
+        "v",
+        "w",
+        "y"
+      ]
+    },
+    "selected_fingers": {
+      "n_classes": 9,
+      "null_rate": 0.0,
+      "classes": [
+        "i",
+        "im",
+        "imr",
+        "imrp",
+        "ip",
+        "m",
+        "mrp",
+        "p",
+        "t"
+      ]
+    },
+    "flexion": {
+      "n_classes": 7,
+      "null_rate": 0.0637,
+      "classes": [
+        "Bent",
+        "Curved",
+        "Flat",
+        "FullyClosed",
+        "FullyOpen",
+        "Stacked",
+        "NA"
+      ]
+    },
+    "spread": {
+      "n_classes": 3,
+      "null_rate": 0.471,
+      "classes": [
+        "0",
+        "1",
+        "NA"
+      ]
+    },
+    "thumb_position": {
+      "n_classes": 2,
+      "null_rate": 0.0,
+      "classes": [
+        "Closed",
+        "Open"
+      ]
+    },
+    "thumb_contact": {
+      "n_classes": 3,
+      "null_rate": 0.0637,
+      "classes": [
+        "0",
+        "1",
+        "NA"
+      ]
+    }
+  }
+}

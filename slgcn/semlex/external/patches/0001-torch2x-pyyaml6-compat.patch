@@ -1,0 +1,60 @@
+diff --git a/SL-GCN/main.py b/SL-GCN/main.py
+index 99d2626..b88d439 100644
+--- a/SL-GCN/main.py
++++ b/SL-GCN/main.py
+@@ -573,7 +573,7 @@ if __name__ == '__main__':
+     p = parser.parse_args()
+     if p.config is not None:
+         with open(p.config, 'r') as f:
+-            default_arg = yaml.load(f)
++            default_arg = yaml.load(f, Loader=yaml.FullLoader)
+         key = vars(p).keys()
+         for k in default_arg.keys():
+             if k not in key:
+diff --git a/SL-GCN/model/decouple_gcn_attn.py b/SL-GCN/model/decouple_gcn_attn.py
+index b847d43..7f6ef86 100644
+--- a/SL-GCN/model/decouple_gcn_attn.py
++++ b/SL-GCN/model/decouple_gcn_attn.py
+@@ -21,18 +21,18 @@ def conv_branch_init(conv):
+     n = weight.size(0)
+     k1 = weight.size(1)
+     k2 = weight.size(2)
+-    nn.init.normal(weight, 0, math.sqrt(2. / (n * k1 * k2)))
+-    nn.init.constant(conv.bias, 0)
++    nn.init.normal_(weight, 0, math.sqrt(2. / (n * k1 * k2)))
++    nn.init.constant_(conv.bias, 0)
+ 
+ 
+ def conv_init(conv):
+-    nn.init.kaiming_normal(conv.weight, mode='fan_out')
+-    nn.init.constant(conv.bias, 0)
++    nn.init.kaiming_normal_(conv.weight, mode='fan_out')
++    nn.init.constant_(conv.bias, 0)
+ 
+ 
+ def bn_init(bn, scale):
+-    nn.init.constant(bn.weight, scale)
+-    nn.init.constant(bn.bias, 0)
++    nn.init.constant_(bn.weight, scale)
++    nn.init.constant_(bn.bias, 0)
+ 
+ 
+ class unit_tcn(nn.Module):
+@@ -110,7 +110,7 @@ class unit_gcn(nn.Module):
+ 
+         self.Linear_bias = nn.Parameter(torch.zeros(
+             1, out_channels * num_subset, 1, 1, requires_grad=True, device='cuda'), requires_grad=True)
+-        nn.init.constant(self.Linear_bias, 1e-6)
++        nn.init.constant_(self.Linear_bias, 1e-6)
+ 
+         eye_array = []
+         for i in range(out_channels):
+@@ -249,7 +249,7 @@ class Model(nn.Module):
+         self.l10 = TCN_GCN_unit(256, 256, A, groups, num_point, block_size)
+ 
+         self.fc = nn.Linear(256, num_class)
+-        nn.init.normal(self.fc.weight, 0, math.sqrt(2. / num_class))
++        nn.init.normal_(self.fc.weight, 0, math.sqrt(2. / num_class))
+         bn_init(self.data_bn, 1)
+ 
+     def forward(self, x, keep_prob=0.9):

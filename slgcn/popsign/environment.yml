@@ -1,0 +1,31 @@
+name: popsign-slgcn-env
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch=2.3.1
+  - pytorch-cuda=12.1
+  # mkl<2024 is REQUIRED: mkl 2025 drops the iJIT_NotifyEvent symbol that
+  # torch 2.3's libtorch_cpu.so links against, so `import torch` dies with
+  # "undefined symbol: iJIT_NotifyEvent". Solved envs may silently pull 2025.
+  - mkl<2024
+  # numpy<2: the vendored 2021 SAM-SLR-v2 code predates the numpy 2 ABI/API
+  # break; matches the slgcn-env / lsc-benchmark-env pin rationale.
+  - numpy<2
+  # pyarrow is the PopSign-specific addition — SEM-LEX shipped dense npys,
+  # PopSign ships Kaggle-format parquet. Read directly via pyarrow.parquet
+  # (not pandas.read_parquet) so the long->dense pivot stays explicit.
+  - pyarrow
+  - pandas
+  - pyyaml
+  - tqdm
+  - matplotlib
+  - pip
+  - pip:
+      # 4.x pin: 5.x requires numpy>=2. Overlay-QA rendering only.
+      - opencv-python-headless==4.10.0.84
+      # Reads the LSC benchmark's raw .pose files (05_lsc_eval/).
+      - pose-format==0.14.1

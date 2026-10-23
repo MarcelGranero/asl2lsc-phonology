@@ -1,0 +1,26 @@
+# Training / evaluation env for the SHuBERT leaf, the baseline MLP and the
+# LSC inference wrappers (conda env name used by the sbatch files). Pins
+# match the environment the released checkpoints were trained in
+# (python 3.10.13, torch 2.3.0 + CUDA 12.1, numpy 1.26.4).
+#
+# fairseq is the copy shipped inside the upstream SHuBERT repository
+# (github.com/ShesterG/SHuBERT, fairseq/); install it into this env after
+# creating it:
+#   conda env create -f environment.yml
+#   conda activate shubert_train_env
+#   pip install --no-deps -e <SHuBERT checkout>/fairseq
+name: shubert_train_env
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch=2.3.0
+  - pytorch-cuda=12.1
+  # mkl 2025 drops a symbol torch 2.3's libtorch_cpu.so links against.
+  - mkl<2024
+  - numpy=1.26
+  - pyyaml
+  - omegaconf
+  - pip

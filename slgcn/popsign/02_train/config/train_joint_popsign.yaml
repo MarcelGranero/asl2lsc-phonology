@@ -1,0 +1,62 @@
+# PopSign SL-GCN training config.
+# Byte-mirrors external SAM-SLR-v2 SL-GCN/config/WLASL/train/train_joint.yaml
+# (the upstream WLASL recipe, same conservative default the SL-GCN Sem-Lex leaf uses —
+# there is no published PopSign SL-GCN recipe to follow). Deltas from
+# upstream: data paths, num_class (MUST equal results/vocab.json n_classes —
+# asserted by run_train.sbatch), device [0] (single GPU), num_worker 8
+# (matches sbatch cpus), show_topk [1,3,5].
+#
+# window_size 120 is upstream's; note gendata already padded/cropped every
+# clip to 150 frames, and ~8-16% of PopSign clips were CROPPED there.
+# Left at the upstream value deliberately — changing it
+# is an experiment to run against this baseline, not a prep-time decision.
+Experiment_name: popsign_joint
+
+# feeder
+feeder: feeders.feeder.Feeder
+train_feeder_args:
+  data_path: ${ASL2LSC_SLGCN_POPSIGN_DATA}/gendata_27/train_data_joint.npy
+  label_path: ${ASL2LSC_SLGCN_POPSIGN_DATA}/gendata_27/train_label.pkl
+  debug: False
+  random_choose: True
+  window_size: 120
+  random_shift: True
+  normalization: True
+  random_mirror: True
+  random_mirror_p: 0.5
+  is_vector: False
+
+test_feeder_args:
+  data_path: ${ASL2LSC_SLGCN_POPSIGN_DATA}/gendata_27/val_data_joint.npy
+  label_path: ${ASL2LSC_SLGCN_POPSIGN_DATA}/gendata_27/val_label.pkl
+  random_mirror: False
+  normalization: True
+
+# model
+model: model.decouple_gcn_attn.Model
+model_args:
+  num_class: 250
+  num_point: 27
+  num_person: 1
+  graph: graph.sign_27.Graph
+  groups: 16
+  block_size: 41
+  graph_args:
+    labeling_mode: 'spatial'
+
+#optim
+weight_decay: 0.0001
+base_lr: 0.1
+step: [150, 200]
+
+# training
+device: [0]
+keep_rate: 0.9
+only_train_epoch: 1
+batch_size: 64
+test_batch_size: 64
+num_epoch: 250
+nesterov: True
+warm_up_epoch: 20
+num_worker: 8
+show_topk: [1, 3, 5]

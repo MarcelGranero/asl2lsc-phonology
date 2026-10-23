@@ -1,0 +1,21 @@
+name: slgcn-env
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch=2.3
+  - pytorch-cuda=12.1
+  # numpy<2: the vendored 2021 SAM-SLR-v2 code and mmap'd float16 arrays predate the
+  # numpy 2 ABI/API break; matches the lsc-benchmark-env pin rationale.
+  - numpy<2
+  - pandas
+  - pyyaml
+  - tqdm
+  - matplotlib
+  - pip
+  - pip:
+      # 4.x pin: 5.x requires numpy>=2. Overlay-QA rendering only.
+      - opencv-python-headless==4.10.0.84

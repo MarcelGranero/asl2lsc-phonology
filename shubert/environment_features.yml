@@ -1,0 +1,23 @@
+# Preprocessing env for the SHuBERT feature pipeline (10_data_prep transcode,
+# 20_preprocess kpe/crops/DINOv2/body): the versions the released features
+# were extracted with. ffmpeg comes from conda-forge.
+#   conda env create -f environment_features.yml
+name: shubert_feature_extraction
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch=2.2.2
+  - torchvision=0.17.2
+  - pytorch-cuda=12.1
+  - numpy=1.26
+  - ffmpeg
+  - tqdm
+  - pip
+  - pip:
+      - mediapipe==0.10.14
+      - decord==0.6.0
+      - opencv-python==4.10.0.84
+      - pillow==10.2.0

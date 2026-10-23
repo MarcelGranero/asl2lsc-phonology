@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "Zero-Shot Cross-Lingual Recognition of Sign Language Handshapes"
+authors:
+  - family-names: "Granero-Moya"
+    given-names: "Marcel"
+    email: "marcel.granero@upf.edu"
+    affiliation: "Universitat Pompeu Fabra"
+  - family-names: "del Corral Farrarós"
+    given-names: "Carolina"
+  - family-names: "Haro"
+    given-names: "Gloria"
+  - family-names: "Ballester"
+    given-names: "Coloma"
+  - family-names: "Marques"
+    given-names: "Ricardo"
+repository-code: "https://github.com/MarcelGranero/asl2lsc-phonology"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "Zero-Shot Cross-Lingual Recognition of Sign Language Handshapes"
+  authors:
+    - family-names: "Granero-Moya"
+      given-names: "Marcel"
+    - family-names: "del Corral Farrarós"
+      given-names: "Carolina"
+    - family-names: "Haro"
+      given-names: "Gloria"
+    - family-names: "Ballester"
+      given-names: "Coloma"
+    - family-names: "Marques"
+      given-names: "Ricardo"
+  year: 2026
+  conference:
+    name: "2nd Workshop on Sign Language Processing (WSLP), co-located with EMNLP 2026"
+  identifiers:
+    - type: other
+      value: "arXiv:2609.18772"
+      description: "arXiv preprint of this paper (cite the WSLP version)"
